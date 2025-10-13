@@ -9,7 +9,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Sentosa\Http\Middleware\Authenticate;
 
 return [
-    'middlewares' => [
+    'middlewares'      => [
         EncryptCookies::class,
         AddQueuedCookiesToResponse::class,
         StartSession::class,
@@ -19,5 +19,5 @@ return [
     ],
     'auth_middlewares' => [
         Authenticate::class,
-    ]
+    ],
 ];

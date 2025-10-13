@@ -1,4 +1,5 @@
 <?php
+
 namespace Sentosa\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
@@ -9,7 +10,7 @@ class Authenticate extends Middleware
     {
         $guard = panel()->auth();
 
-        if (! $guard->check()) {
+        if (!$guard->check()) {
             $this->unauthenticated($request, $guards);
         }
 

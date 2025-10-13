@@ -1,4 +1,5 @@
 <?php
+
 namespace Sentosa\Http\Middleware;
 
 use Closure;

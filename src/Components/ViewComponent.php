@@ -1,4 +1,5 @@
 <?php
+
 namespace Sentosa\Components;
 
 use Closure;
@@ -16,29 +17,29 @@ abstract class ViewComponent
 
     public static string $view = '';
 
+    public function render()
+    {
+        if (!$this->shouldRender()) {
+            return '';
+        }
+        return view($this->getView(), array_merge(['self' => $this], $this->getContext()));
+    }
+
+    protected function shouldRender(): bool
+    {
+        return true;
+    }
+
+    protected function getView(): string
+    {
+        return static::$view;
+    }
+
     protected function evaluate($value, ...$args)
     {
         if ($value instanceof Closure) {
             return call_user_func($value, $this, ...$args);
         }
         return $value;
-    }
-
-    public function render()
-    {
-        if(!$this->shouldRender()) {
-            return '';
-        }
-        return view($this->getView(), array_merge(['self' => $this], $this->getContext()));
-    }
-
-    protected function shouldRender():bool
-    {
-        return true;
-    }
-
-    protected function getView():string
-    {
-        return static::$view;
     }
 }

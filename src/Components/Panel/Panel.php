@@ -1,4 +1,5 @@
 <?php
+
 namespace Sentosa\Components\Panel;
 
 use Closure;
@@ -15,18 +16,16 @@ class Panel extends ViewComponent
     use HasRoutes;
     use HasId;
 
+    public static string $view = 'sentosa::components.panel.panel';
     protected bool $booted = false;
     protected bool $served = false;
-
     /**
      * @var array<array-key, Closure>
      */
     protected array $bootCallbacks = [];
     protected array $servingCallbacks = [];
 
-    public static string $view = 'sentosa::components.panel.panel';
-
-    public function boot():void
+    public function boot(): void
     {
         if ($this->booted) {
             return;
@@ -36,6 +35,7 @@ class Panel extends ViewComponent
         }
         $this->booted = true;
     }
+
     public function bootUsing(Closure $callback): static
     {
         $this->bootCallbacks[] = $callback;
@@ -48,9 +48,9 @@ class Panel extends ViewComponent
         return $this;
     }
 
-    public function serving():void
+    public function serving(): void
     {
-        if($this->served) {
+        if ($this->served) {
             return;
         }
         foreach ($this->servingCallbacks as $callback) {

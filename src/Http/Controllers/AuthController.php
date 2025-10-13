@@ -16,7 +16,7 @@ class AuthController
             return redirect()->intended('/');
         }
         return redirect()->back()->withErrors([
-            'email' => 'Invalid credentials'
+            'email' => 'Invalid credentials',
         ]);
     }
 }

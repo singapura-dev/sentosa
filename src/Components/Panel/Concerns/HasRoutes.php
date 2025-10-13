@@ -29,9 +29,9 @@ trait HasRoutes
         return $this;
     }
 
-    public function domains($domains):static
+    public function domains($domains): static
     {
-        $domains = is_array($domains) ? $domains : [$domains];
+        $domains       = is_array($domains) ? $domains : [$domains];
         $this->domains = [
             ...$this->domains,
             ...$domains,
@@ -39,7 +39,7 @@ trait HasRoutes
         return $this;
     }
 
-    public function getDomains():array
+    public function getDomains(): array
     {
         return $this->domains;
     }
@@ -81,7 +81,7 @@ trait HasRoutes
 
     public function middleware($middleware): static
     {
-        $middleware = is_array($middleware) ? $middleware : [$middleware];
+        $middleware       = is_array($middleware) ? $middleware : [$middleware];
         $this->middleware = [
             ...$this->middleware,
             ...$middleware,
@@ -92,7 +92,7 @@ trait HasRoutes
 
     public function authMiddleware($middleware): static
     {
-        $middleware = is_array($middleware) ? $middleware : [$middleware];
+        $middleware           = is_array($middleware) ? $middleware : [$middleware];
         $this->authMiddleware = [
             ...$this->authMiddleware,
             ...$middleware,
@@ -104,7 +104,7 @@ trait HasRoutes
     public function getMiddleware(): array
     {
         return [
-            SetupPanel::class.":{$this->getId()}",
+            SetupPanel::class . ":{$this->getId()}",
             ...config('sentosa.middlewares'),
             ...$this->middleware,
         ];
