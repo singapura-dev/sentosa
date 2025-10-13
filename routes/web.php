@@ -19,8 +19,12 @@ foreach (app(PanelManager::class)->getPanels() as $panel)
                 $routes($panel);
             }
 
-            Route::get('login', [AuthController::class,'login'])->name('login');
-            Route::post('login', [AuthController::class,'postLogin'])->name('login.post');
+            if ($panel->hasLogin()) {
+                Route::name('auth.')->group(function() {
+                    Route::get('login', [AuthController::class,'login'])->name('login');
+                    Route::post('login', [AuthController::class,'postLogin'])->name('login.post');
+                });
+            }
 
             Route::middleware($panel->getAuthMiddleware())
                 ->group(function () use ($panel) {
@@ -28,10 +32,12 @@ foreach (app(PanelManager::class)->getPanels() as $panel)
                         $routes($panel);
                     }
 
-                    Route::get('logout', function () {
-                        panel()->auth()->logout();
-                        return back();
-                    })->name('logout');
+                    if ($panel->hasLogin()) {
+                        Route::get('logout', function () {
+                            panel()->auth()->logout();
+                            return back();
+                        })->name('logout');
+                    }
 
                     Route::get('/', function () {
                         return "Hello " . panel()->auth()->user()->name . '<a href="/logout">logout</a>';

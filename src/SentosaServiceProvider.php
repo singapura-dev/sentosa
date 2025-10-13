@@ -7,6 +7,8 @@ class SentosaServiceProvider extends ServiceProvider
 {
     public function register():void
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'sentosa');
+
         $this->app->scoped(PanelManager::class, function() {
             return new PanelManager();
         });

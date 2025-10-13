@@ -105,12 +105,16 @@ trait HasRoutes
     {
         return [
             SetupPanel::class.":{$this->getId()}",
+            ...config('sentosa.middlewares'),
             ...$this->middleware,
         ];
     }
 
     public function getAuthMiddleware(): array
     {
-        return $this->authMiddleware;
+        return [
+            ...config('sentosa.auth_middlewares'),
+            ...$this->authMiddleware,
+        ];
     }
 }

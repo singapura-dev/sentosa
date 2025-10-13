@@ -12,7 +12,7 @@ class AuthController
     public function postLogin()
     {
         $credentials = request()->only(['email', 'password']);
-        if (auth()->attempt($credentials)) {
+        if (panel()->auth()->attempt($credentials)) {
             return redirect()->intended('/');
         }
         return redirect()->back()->withErrors([
