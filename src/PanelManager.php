@@ -6,13 +6,20 @@ use Sentosa\Components\Panel\Panel;
 
 class PanelManager
 {
-
     protected array $panels = [];
-    protected string $currentPanelId = 'default';
+
+    protected string $currentPanelId = '';
 
     public function getPanels(): array
     {
         return $this->panels;
+    }
+    public function setCurrentPanel($id):void
+    {
+        if(empty($this->panels[$id])) {
+            throw new LogicException("Panel with id $id not found");
+        }
+        $this->currentPanelId = $id;
     }
 
     public function registerPanel($panel):Panel

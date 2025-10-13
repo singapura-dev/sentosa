@@ -2,11 +2,24 @@
 
 namespace Sentosa\Components\Panel\Concerns;
 
+use Closure;
+use Laravel\SerializableClosure\Serializers\Native;
 use Sentosa\Http\Middleware\SetupPanel;
 
 trait HasRoutes
 {
+    /**
+     * @var array<Closure | Native>
+     */
+    protected array $routes = [];
+
+    /**
+     * @var array<Closure | Native>
+     */
+    protected array $authenticatedRoutes = [];
+
     protected array $middleware = [];
+    protected array $authMiddleware = [];
     protected string $path = '';
     protected array $domains = [];
 
@@ -31,6 +44,36 @@ trait HasRoutes
         return $this->domains;
     }
 
+    public function routes(?Closure $routes): static
+    {
+        $this->routes[] = $routes;
+
+        return $this;
+    }
+
+    public function authenticatedRoutes(?Closure $routes): static
+    {
+        $this->authenticatedRoutes[] = $routes;
+
+        return $this;
+    }
+
+    /**
+     * @return array<Closure | Native>
+     */
+    public function getRoutes(): array
+    {
+        return $this->routes;
+    }
+
+    /**
+     * @return array<Closure | Native>
+     */
+    public function getAuthenticatedRoutes(): array
+    {
+        return $this->authenticatedRoutes;
+    }
+
     public function getPath(): string
     {
         return $this->path;
@@ -47,11 +90,27 @@ trait HasRoutes
         return $this;
     }
 
+    public function authMiddleware($middleware): static
+    {
+        $middleware = is_array($middleware) ? $middleware : [$middleware];
+        $this->authMiddleware = [
+            ...$this->authMiddleware,
+            ...$middleware,
+        ];
+
+        return $this;
+    }
+
     public function getMiddleware(): array
     {
         return [
             SetupPanel::class.":{$this->getId()}",
             ...$this->middleware,
         ];
+    }
+
+    public function getAuthMiddleware(): array
+    {
+        return $this->authMiddleware;
     }
 }
