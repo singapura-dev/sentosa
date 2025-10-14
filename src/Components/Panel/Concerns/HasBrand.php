@@ -2,17 +2,15 @@
 
 namespace Sentosa\Components\Panel\Concerns;
 
-use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 
 trait HasBrand
 {
-    protected string|Htmlable|Closure|null $brandName = null;
+    protected mixed $brandName = null;
 
-    public function brandName(string|Htmlable|Closure|null $name): static
+    public function brandName($name): static
     {
         $this->brandName = $name;
-
         return $this;
     }
 
