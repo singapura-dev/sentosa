@@ -1,5 +1,7 @@
 <?php
 
+use Sentosa\Components\Panel\Panel;
+use Sentosa\Components\UI\Button;
 use Sentosa\Http\Controllers\AuthController;
 use Sentosa\PanelManager;
 
@@ -35,11 +37,15 @@ foreach (app(PanelManager::class)->getPanels() as $panel) {
                             Route::get('logout', function () {
                                 panel()->auth()->logout();
                                 return back();
-                            })->name('logout');
+                            })->name('auth.logout');
                         }
 
                         Route::get('/', function () {
-                            return "Hello " . panel()->auth()->user()->name . '<a href="/logout">logout</a>';
+                            return panel()
+                                ->children('Title', Panel::CHILDREN_POSITION_HEADER)
+                                ->children('This is home, can edit by set panel()->homeUrl($your_home_url)')
+                                ->children(Button::make()->label("Click")->class('btn btn-primary'))
+                                ->render();
                         })->name('home');
                     });
             });

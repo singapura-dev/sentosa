@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Sentosa\Components\Concerns;
 
 trait Makeable

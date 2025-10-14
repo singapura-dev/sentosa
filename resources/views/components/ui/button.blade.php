@@ -1,1 +1,3 @@
-<button>Button</button>
+<button {{$self->getAttributes()}}>
+    {!! $self->getLabel() !!}
+</button>

@@ -3,6 +3,7 @@
 namespace Sentosa\Components\Panel\Concerns;
 
 use Closure;
+use Illuminate\Support\Str;
 use Laravel\SerializableClosure\Serializers\Native;
 use Sentosa\Http\Middleware\SetupPanel;
 
@@ -21,12 +22,25 @@ trait HasRoutes
     protected array $middleware = [];
     protected array $authMiddleware = [];
     protected string $path = '';
+
+    protected string|Closure $homeUrl = '';
     protected array $domains = [];
 
     public function path($path): static
     {
         $this->path = $path;
         return $this;
+    }
+
+    public function homeUrl($url):static
+    {
+        $this->homeUrl = $url;
+        return $this;
+    }
+
+    public function getHomeUrl():string
+    {
+        return $this->evaluate($this->homeUrl);
     }
 
     public function domains($domains): static
@@ -64,6 +78,23 @@ trait HasRoutes
     public function getRoutes(): array
     {
         return $this->routes;
+    }
+
+    public function route($name,...$args)
+    {
+        if (Str::isUrl($name)) {
+            return $name;
+        }
+
+        $route_name = $name;
+
+        $as = $this->getId(). '.';
+
+        if (!Str::startsWith($route_name, $as)) {
+            $route_name = $as . $route_name;
+        }
+
+        return route($route_name, ...$args);
     }
 
     /**
