@@ -1,7 +1,5 @@
-@php
-    @endphp
 @stack('before_html')
-    <!doctype html>
+<!doctype html>
 <html {{$htmlAttributes??''}}>
 <head>
     @stack('head_meta')
