@@ -10,6 +10,7 @@ class PanelManager
     protected array $panels = [];
 
     protected string $currentPanelId = '';
+    protected string $defaultPanelId = '';
 
     public function getPanels(): array
     {
@@ -31,11 +32,24 @@ class PanelManager
             throw new LogicException("Panel with id $id already exists");
         }
         $this->panels[$id] = $panel;
+        $panel->boot();
+
+        if (empty($this->defaultPanelId)) {
+            $this->defaultPanelId = $id;
+        }
+
+        if ($panel->isDefault()) {
+            $this->defaultPanelId = $id;
+        }
         return $panel;
     }
 
-    public function getPanel(string $id): Panel
+    public function getPanel(?string $id = null): Panel
     {
+        if (empty($id)) {
+            return $this->getCurrentOrDefaultPanel();
+        }
+
         if (empty($this->panels[$id])) {
             throw new LogicException("Panel with id $id not found");
         }
@@ -43,11 +57,12 @@ class PanelManager
         return $this->panels[$id];
     }
 
-    public function getCurrentPanel(): Panel
+    public function getCurrentOrDefaultPanel(): Panel
     {
-        if (empty($this->panels[$this->currentPanelId])) {
-            throw new LogicException("Panel with id $this->currentPanelId not found");
+        $id = $this->currentPanelId ?: $this->defaultPanelId;
+        if (empty($this->panels[$id])) {
+            throw new LogicException("Panel with id $id not found");
         }
-        return $this->panels[$this->currentPanelId];
+        return $this->panels[$id];
     }
 }

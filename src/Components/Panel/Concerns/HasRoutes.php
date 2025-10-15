@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Str;
 use Laravel\SerializableClosure\Serializers\Native;
 use Sentosa\Http\Middleware\SetupPanel;
+use Sentosa\Pages\Dashboard;
 
 trait HasRoutes
 {
@@ -22,6 +23,7 @@ trait HasRoutes
     protected array $middleware = [];
     protected array $authMiddleware = [];
     protected string $path = '';
+    protected string $dashboard = Dashboard::class;
 
     protected string|Closure $homeUrl = '';
     protected array $domains = [];
@@ -30,6 +32,17 @@ trait HasRoutes
     {
         $this->path = $path;
         return $this;
+    }
+
+    public function dashboard($value): static
+    {
+        $this->dashboard = $value;
+        return $this;
+    }
+
+    public function getDashboard():string
+    {
+        return $this->dashboard;
     }
 
     public function homeUrl($url):static

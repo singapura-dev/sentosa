@@ -21,6 +21,8 @@ abstract class ViewComponent
     use WithAttributes;
 
     public static string $view = '';
+    public mixed $shouldRenderUsing = true;
+    public array $renderCallbacks = [];
 
     public function __construct(...$args)
     {
@@ -38,6 +40,42 @@ abstract class ViewComponent
         if ($namedParameter) {
             $this->configureFromArray($args);
         }
+    }
+
+    public function rendering(Closure $callback): static
+    {
+        $this->renderCallbacks[] = $callback;
+        return $this;
+    }
+
+    public function render($output = true)
+    {
+        $this->callMethods('rendering');
+        if (!$this->shouldRender()) {
+            return '';
+        }
+        foreach ($this->renderCallbacks as $callback) {
+            $callback($this);
+        }
+        if ($output) {
+            return view($this->getView(), array_merge(['self' => $this], $this->getContext()));
+        }
+    }
+
+    public function shouldRenderUsing($value): static
+    {
+        $this->shouldRenderUsing = $value;
+        return $this;
+    }
+
+    protected function shouldRender(): bool
+    {
+        return (bool) $this->evaluate($this->shouldRenderUsing);
+    }
+
+    protected function getView(): string
+    {
+        return static::$view;
     }
 
     protected function configureFromArray($config): void
@@ -61,25 +99,6 @@ abstract class ViewComponent
                 }
             }
         }
-    }
-
-    public function render()
-    {
-        $this->callMethods('rendering');
-        if (!$this->shouldRender()) {
-            return '';
-        }
-        return view($this->getView(), array_merge(['self' => $this], $this->getContext()));
-    }
-
-    protected function shouldRender(): bool
-    {
-        return true;
-    }
-
-    protected function getView(): string
-    {
-        return static::$view;
     }
 
     protected function evaluate($value, ...$args)
