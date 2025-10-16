@@ -19,6 +19,7 @@ class SentosaServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'sentosa');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'sentosa');
         if($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../resources/assets/' => public_path('vendor/sentosa/'),

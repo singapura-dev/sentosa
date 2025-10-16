@@ -1,50 +1,58 @@
 @php use Sentosa\Components\Panel\Panel; @endphp
-<x-sentosa::layouts.html :html-attributes="$self->getAttributes('html')">
+<x-sentosa::layouts.html :html-attributes="$self->getAttributes('html')" :body-attributes="$self->getAttributes('body')->merge(['class'=>'layout-fluid'])">
     <x-sentosa::providers.toast>
         @include('sentosa::components.partials.children', [
-            'children' => panel()->getChildren(Panel::CHILDREN_POSITION_BEFORE_PAGE),
+            'children' => $self->getChildren(Panel::CHILDREN_POSITION_BEFORE_PAGE),
         ])
-        <div class="page">
+        <div {{$self->getAttributes('page')->merge(['class'=>'page'])}}>
+            @if($self->isVertical())
+                @include('sentosa::components.panel.partials.side_navigation')
+            @endif
             @include('sentosa::components.partials.children', [
-                'children' => panel()->getChildren(Panel::CHILDREN_POSITION_BEFORE_HEADER),
+                'children' => $self->getChildren(Panel::CHILDREN_POSITION_BEFORE_HEADER),
             ])
             <!-- BEGIN NAVBAR  -->
-            <header class="navbar navbar-expand-md d-print-none">
+            <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex">
                 <div class="container-xl">
-                    <!-- BEGIN NAVBAR TOGGLER -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
-                            aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <!-- END NAVBAR TOGGLER -->
-                    <!-- BEGIN NAVBAR LOGO -->
-                    <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                        <a href="{{panel()->getHomeUrl()}}" aria-label="{{panel()->getBrandName()}}">
-                            {{panel()->getBrandName()}}
-                        </a>
-                    </div>
-                    <!-- END NAVBAR LOGO -->
-                    <div class="navbar-nav flex-row order-md-last">
-                        @include('sentosa::components.partials.children', [
-                            'children' => panel()->getChildren(Panel::CHILDREN_POSITION_BEFORE_USER),
-                        ])
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown"
-                               aria-label="Open user menu">
-                                <span class="avatar avatar-sm"
-                                      style="background-image: url({{panel()->auth()->user()->avatar}})"> </span>
-                                <div class="d-none d-xl-block ps-2">
-                                    <div>{{panel()->auth()->user()->name}}</div>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                @include('sentosa::components.panel.partials.user_navigation')
+                    @if($self->isVertical())
+                        <div>
+                            <div class="d-none d-lg-flex">
+                                @include('sentosa::components.partials.children', [
+                                   'children' => $self->getChildren(Panel::CHILDREN_POSITION_TOP_HEADER),
+                                ])
                             </div>
                         </div>
-                    </div>
-                    <div class="collapse navbar-collapse" id="navbar-menu">
-                        @include('sentosa::components.panel.partials.navigation')
-                    </div>
+                        <div class="navbar-nav flex-row order-md-last">
+                            @include('sentosa::components.partials.children', [
+                               'children' => $self->getChildren(Panel::CHILDREN_POSITION_BEFORE_USER),
+                            ])
+                            @include('sentosa::components.panel.partials.user_navigation')
+                        </div>
+                    @else
+                        <!-- BEGIN NAVBAR TOGGLER -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbar-menu"
+                                aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <!-- END NAVBAR TOGGLER -->
+                        <!-- BEGIN NAVBAR LOGO -->
+                        <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                            <a href="{{$self->getHomeUrl()}}" aria-label="{{$self->getBrandName()}}">
+                                @include('sentosa::components.panel.partials.brand_logo')
+                            </a>
+                        </div>
+                        <!-- END NAVBAR LOGO -->
+                        <div class="navbar-nav flex-row order-md-last">
+                            @include('sentosa::components.partials.children', [
+                                'children' => $self->getChildren(Panel::CHILDREN_POSITION_BEFORE_USER),
+                            ])
+                            @include('sentosa::components.panel.partials.user_navigation')
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbar-menu">
+                            @include('sentosa::components.panel.partials.top_navigation')
+                        </div>
+                    @endif
                 </div>
             </header>
             <!-- END NAVBAR  -->

@@ -3,6 +3,14 @@ body, html {
     padding: 0;
 }
 
+.navbar {
+    --tblr-navbar-active-bg: rgba(var(--tblr-primary-rgb),0.04) !important;
+}
+
+.navbar-vertical.navbar-expand-lg{
+    overflow-y: auto !important;
+}
+
 a {
     color: unset;
     text-decoration: none;
@@ -215,9 +223,14 @@ p, .pagination {
     :host,
     :root {
         margin-left: 0;
+        margin-right: 0;
     }
 }
 
 body {
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+.brand-logo {
+    height: 100%;width: 100%; max-height: 32px; max-width: 110px;
 }

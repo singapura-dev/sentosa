@@ -79,6 +79,9 @@
             // 激活链接所在的nav-item
             const navItem = activeLink.closest(".nav-item");
             navItem?.classList.add("active");
+
+            const parent_nav = navItem.querySelector(".dropdown-menu");
+            parent_nav?.classList.add("show");
         }
     }
 

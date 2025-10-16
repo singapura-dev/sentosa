@@ -11,6 +11,7 @@ use Sentosa\Components\Panel\Concerns\HasBrand;
 use Sentosa\Components\Panel\Concerns\HasNavigation;
 use Sentosa\Components\Panel\Concerns\HasPage;
 use Sentosa\Components\Panel\Concerns\HasRoutes;
+use Sentosa\Components\Panel\Concerns\HasTheme;
 use Sentosa\Components\ViewComponent;
 
 class Panel extends ViewComponent
@@ -21,6 +22,7 @@ class Panel extends ViewComponent
     use HasNavigation;
     use HasPage;
     use HasRoutes;
+    use HasTheme;
     use HasToast;
     use HasId;
 
@@ -29,6 +31,7 @@ class Panel extends ViewComponent
     const string CHILDREN_POSITION_BEFORE_HEADER = 'before_header';
     const string CHILDREN_POSITION_BEFORE_PAGE   = 'before_page';
     const string CHILDREN_POSITION_BEFORE_USER   = 'before_user';
+    const string CHILDREN_POSITION_TOP_HEADER    = 'top_header';
     const string CHILDREN_POSITION_STYLE         = 'style';
     const string CHILDREN_POSITION_AFTER_STYLE   = 'after_style';
     const string CHILDREN_POSITION_BEFORE_SCRIPT = 'before_script';
@@ -36,6 +39,7 @@ class Panel extends ViewComponent
     const string CHILDREN_POSITION_AFTER_SCRIPT  = 'after_script';
     const string CHILDREN_POSITION_HEADER        = 'header';
     const string CHILDREN_POSITION_FOOTER        = 'footer';
+
     public static string $view = 'sentosa::components.panel.panel';
     public static string $blank_view = 'sentosa::components.panel.blank';
 
@@ -51,6 +55,7 @@ class Panel extends ViewComponent
         '/vendor/sentosa/js/sentosa.js',
         '/vendor/sentosa/css/sentosa.css',
     ];
+
     protected bool $booted = false;
     protected bool $served = false;
     protected bool $blank = false;
