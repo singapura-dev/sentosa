@@ -3,9 +3,11 @@
 
 namespace Sentosa\Components\Chart;
 
+use Closure;
 use Sentosa\Components\UI\Ag;
 
 /**
+ * @method static options(array|Closure $options) Set options
  */
 class AgChart extends Ag
 {
