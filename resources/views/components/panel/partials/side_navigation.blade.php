@@ -47,7 +47,7 @@
                             @endif
                         </a>
                         @if($hasChildren)
-                            <div class="dropdown-menu" data-bs-popper="static">
+                            <div class="dropdown-menu aside-dropdown" data-bs-popper="static">
                                 @foreach($item->getChildren() as $child)
                                     @php
                                         $child->render(false);

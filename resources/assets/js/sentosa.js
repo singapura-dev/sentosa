@@ -80,7 +80,7 @@
             const navItem = activeLink.closest(".nav-item");
             navItem?.classList.add("active");
 
-            const parent_nav = navItem.querySelector(".dropdown-menu");
+            const parent_nav = navItem.querySelector(".aside-dropdown");
             parent_nav?.classList.add("show");
         }
     }
