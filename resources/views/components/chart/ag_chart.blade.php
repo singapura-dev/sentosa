@@ -1,6 +1,4 @@
-<h1>Chart</h1>
-<div id="{{$self->getId()}}" {{$self->getAttributes()}}>
-</div>
+<div id="{{$self->getId()}}" {{$self->getAttributes()}}></div>
 
 @push('after_scripts')
     <script>
