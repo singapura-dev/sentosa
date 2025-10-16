@@ -1,0 +1,32 @@
+<?php
+
+
+namespace Sentosa\Components\Chart;
+
+use Sentosa\Components\UI\Ag;
+
+/**
+ */
+class AgChart extends Ag
+{
+    public static string $view = 'sentosa::components.chart.ag_chart';
+
+    public static array $LANG_MAPS = [
+        'zh_CN' => 'agChartsLocale.AG_CHARTS_LOCALE_ZH_CN',
+        'zh_TW' => 'agChartsLocale.AG_CHARTS_LOCALE_ZH_TW',
+    ];
+
+    public function getDefaultOptions(): array
+    {
+        $options = [
+            'container' => '{!!document.getElementById(\'' . $this->getId() . '\')!!}',
+        ];
+        $locale  = $this->getLocaleText();
+        if ($locale) {
+            $options['locale'] = [
+                'localeText' => $locale
+            ];
+        }
+        return $options;
+    }
+}

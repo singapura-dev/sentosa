@@ -21,7 +21,7 @@ trait HasId
     public function getId(): string
     {
         if (!isset($this->id)) {
-            return 'default';
+            $this->id = 'com_'.uniqid();
         }
 
         return $this->id;

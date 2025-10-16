@@ -2,6 +2,7 @@
 
 namespace Sentosa\Components;
 
+use BadMethodCallException;
 use Closure;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
@@ -16,7 +17,9 @@ abstract class ViewComponent
     use CanCallMethods;
     use HasAssets;
     use HasContext;
-    use Macroable;
+    use Macroable {
+        Macroable::__call as macroCall;
+    }
     use Makeable;
     use WithAttributes;
 
@@ -107,5 +110,37 @@ abstract class ViewComponent
             return call_user_func($value, $this, ...$args);
         }
         return $value;
+    }
+
+    public function __call($method, $parameters)
+    {
+        if (static::hasMacro($method)) {
+            return $this->macroCall($method, $parameters);
+        }
+
+        if (Str::startsWith($method, 'set')) {
+            $property = Str::camel(Str::after($method, 'set'));
+            if (public_property_exists($this, $property)) {
+                $this->{$property} = $parameters[0];
+                return $this;
+            }
+        }
+
+        if (Str::startsWith($method, 'get')) {
+            $property = Str::camel(Str::after($method, 'get'));
+            if (property_exists($this, $property)) {
+                if (isset($this->{$property})) {
+                    return evaluate($this->{$property}, $this);
+                }
+                return null;
+            }
+        }
+
+        if (public_property_exists($this, $method)) {
+            $this->{$method} = $parameters[0] ?? null;
+            return $this;
+        }
+
+        throw new BadMethodCallException("Method $method does not exist on " . static::class);
     }
 }

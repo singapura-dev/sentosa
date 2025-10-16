@@ -13,48 +13,19 @@ trait HasRoutes
     /**
      * @var array<Closure | Native>
      */
-    protected array $routes = [];
+    public array $routes = [];
 
     /**
      * @var array<Closure | Native>
      */
-    protected array $authenticatedRoutes = [];
+    public array $authenticatedRoutes = [];
 
-    protected array $middleware = [];
-    protected array $authMiddleware = [];
-    protected string $path = '';
-    protected string $dashboard = Dashboard::class;
-
-    protected string|Closure $homeUrl = '';
-    protected array $domains = [];
-
-    public function path($path): static
-    {
-        $this->path = $path;
-        return $this;
-    }
-
-    public function dashboard($value): static
-    {
-        $this->dashboard = $value;
-        return $this;
-    }
-
-    public function getDashboard():string
-    {
-        return $this->dashboard;
-    }
-
-    public function homeUrl($url):static
-    {
-        $this->homeUrl = $url;
-        return $this;
-    }
-
-    public function getHomeUrl():string
-    {
-        return $this->evaluate($this->homeUrl);
-    }
+    public array $middleware = [];
+    public array $authMiddleware = [];
+    public mixed $path = '';
+    public mixed $homeUrl = '';
+    public mixed $dashboard = Dashboard::class;
+    public array $domains = [];
 
     public function domains($domains): static
     {
@@ -64,11 +35,6 @@ trait HasRoutes
             ...$domains,
         ];
         return $this;
-    }
-
-    public function getDomains(): array
-    {
-        return $this->domains;
     }
 
     public function routes(?Closure $routes): static
@@ -83,14 +49,6 @@ trait HasRoutes
         $this->authenticatedRoutes[] = $routes;
 
         return $this;
-    }
-
-    /**
-     * @return array<Closure | Native>
-     */
-    public function getRoutes(): array
-    {
-        return $this->routes;
     }
 
     public function route($name,...$args)
@@ -108,19 +66,6 @@ trait HasRoutes
         }
 
         return route($route_name, ...$args);
-    }
-
-    /**
-     * @return array<Closure | Native>
-     */
-    public function getAuthenticatedRoutes(): array
-    {
-        return $this->authenticatedRoutes;
-    }
-
-    public function getPath(): string
-    {
-        return $this->path;
     }
 
     public function middleware($middleware): static
