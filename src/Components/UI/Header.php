@@ -10,5 +10,6 @@ class Header extends ViewComponent
 
     public mixed $title = '';
     public mixed $subtitle = '';
+    public mixed $right = null;
 
 }

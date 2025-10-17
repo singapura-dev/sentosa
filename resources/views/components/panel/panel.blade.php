@@ -59,11 +59,14 @@
             <div class="page-wrapper">
                 <!-- BEGIN PAGE HEADER -->
                 @if($header_children = $self->getChildren(Panel::CHILDREN_POSITION_HEADER))
-                    <div class="page-header">
-                        @include('sentosa::components.partials.children',[
-                            'children' => $header_children,
-                        ])
+                    <div class="page-header d-print-none" aria-label="Page header">
+                        <div class="container-xl">
+                            @include('sentosa::components.partials.children',[
+                                'children' => $header_children,
+                            ])
+                        </div>
                     </div>
+
                 @endif
                 <!-- END PAGE HEADER -->
                 <!-- BEGIN PAGE BODY -->

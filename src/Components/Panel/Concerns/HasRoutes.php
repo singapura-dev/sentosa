@@ -8,6 +8,10 @@ use Laravel\SerializableClosure\Serializers\Native;
 use Sentosa\Http\Middleware\SetupPanel;
 use Sentosa\Pages\Dashboard;
 
+/**
+ * @method static dashboard($dashboard)
+ * @method static brandLogo($brandLogo)
+ */
 trait HasRoutes
 {
     /**

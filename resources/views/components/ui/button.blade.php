@@ -1,5 +1,6 @@
 <{{$self->wrapper}} {{$self->getAttributes()}}>
-@include('sentosa::components.partials.children',[
-    'children' => $self->getChildren()
-])
+@if($icon = $self->getIcon())
+{!! render($icon) !!}
+@endif
+{!! render($self->getLabel()) !!}
 </{{$self->wrapper}}>
