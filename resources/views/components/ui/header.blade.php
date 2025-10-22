@@ -1,4 +1,4 @@
-<div class="row g-2 align-items-center mb-3">
+<div class="row g-2 align-items-center">
     <div class="col">
         <div class="page-pretitle">{{$self->getSubtitle()}}</div>
         <h2 class="page-title">{{$self->getTitle()}}</h2>

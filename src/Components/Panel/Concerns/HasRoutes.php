@@ -11,6 +11,9 @@ use Sentosa\Pages\Dashboard;
 /**
  * @method static dashboard($dashboard)
  * @method static brandLogo($brandLogo)
+ * @method static path($value)
+ * @method static homeUrl($value)
+ * @method string getHomeUrl($value)
  */
 trait HasRoutes
 {
@@ -25,10 +28,15 @@ trait HasRoutes
     public array $authenticatedRoutes = [];
 
     public array $middleware = [];
+
     public array $authMiddleware = [];
+
     public mixed $path = '';
+
     public mixed $homeUrl = '';
+
     public mixed $dashboard = Dashboard::class;
+
     public array $domains = [];
 
     public function domains($domains): static
@@ -55,7 +63,7 @@ trait HasRoutes
         return $this;
     }
 
-    public function route($name,...$args)
+    public function route($name, ...$args)
     {
         if (Str::isUrl($name)) {
             return $name;
@@ -63,7 +71,7 @@ trait HasRoutes
 
         $route_name = $name;
 
-        $as = $this->getId(). '.';
+        $as = $this->getId() . '.';
 
         if (!Str::startsWith($route_name, $as)) {
             $route_name = $as . $route_name;

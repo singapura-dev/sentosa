@@ -6,6 +6,7 @@ use Sentosa\Components\UI\Ag;
 
 /**
  * @method static columns($columns)
+ * @method static model($model)
  * @method static rows($rows)
  * @method array getColumns()
  */

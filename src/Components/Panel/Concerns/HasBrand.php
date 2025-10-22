@@ -4,6 +4,9 @@ namespace Sentosa\Components\Panel\Concerns;
 
 use Illuminate\Contracts\Support\Htmlable;
 
+/**
+ * @method static brandName($brandName)
+ */
 trait HasBrand
 {
     public mixed $brandName = null;

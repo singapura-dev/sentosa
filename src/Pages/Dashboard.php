@@ -9,6 +9,6 @@ class Dashboard extends Page
 {
     public function content()
     {
-        return Button::make()->label('Hello');
+        return Button::make()->label('This is a button');
     }
 }

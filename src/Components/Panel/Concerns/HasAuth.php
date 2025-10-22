@@ -2,9 +2,12 @@
 
 namespace Sentosa\Components\Panel\Concerns;
 
+/**
+ * @method static guard($guard)
+ */
 trait HasAuth
 {
-    protected ?string $guard = null;
+    public ?string $guard = null;
     protected bool $hasLogin = true;
     protected ?string $loginUrl = null;
 
@@ -33,12 +36,6 @@ trait HasAuth
     public function auth()
     {
         return auth()->guard($this->getGuard());
-    }
-
-    public function guard(string $name): static
-    {
-        $this->guard = $name;
-        return $this;
     }
 
     public function getGuard(): string

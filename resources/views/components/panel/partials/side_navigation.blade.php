@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse" id="navbar-menu">
             <!-- BEGIN NAVBAR MENU -->
             <ul class="navbar-nav pt-lg-3">
-                @foreach($self->getNavigations() as $item)
+                @foreach(panel()->getNavigations() as $item)
                     @php
                         $item->render(false);
                         $hasChildren = (bool)count($item->getChildren());

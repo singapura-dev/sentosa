@@ -1,5 +1,5 @@
 <ul class="navbar-nav">
-    @foreach($self->getNavigations() as $item)
+    @foreach(panel()->getNavigations() as $item)
         @php
             $item->render(false);
             $hasChildren = (bool)count($item->getChildren());
