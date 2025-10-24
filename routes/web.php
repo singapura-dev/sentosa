@@ -1,6 +1,7 @@
 <?php
 
 use Sentosa\Http\Controllers\AuthController;
+use Sentosa\Http\Controllers\FormController;
 use Sentosa\PanelManager;
 
 foreach (app(PanelManager::class)->getPanels() as $panel) {
@@ -30,7 +31,6 @@ foreach (app(PanelManager::class)->getPanels() as $panel) {
                         foreach ($panel->getAuthenticatedRoutes() as $routes) {
                             $routes($panel);
                         }
-
                         if ($panel->hasLogin()) {
                             Route::get('logout', function () {
                                 panel()->auth()->logout();

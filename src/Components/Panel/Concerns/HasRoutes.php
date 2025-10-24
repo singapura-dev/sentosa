@@ -11,9 +11,16 @@ use Sentosa\Pages\Dashboard;
 /**
  * @method static dashboard($dashboard)
  * @method static brandLogo($brandLogo)
+ * @method static authenticatedRoutes(Closure $callback)
+ * @method static routes(Closure $callback)
  * @method static path($value)
  * @method static homeUrl($value)
- * @method string getHomeUrl($value)
+ * @method string getDashboard()
+ * @method string getHomeUrl()
+ * @method array getDomains()
+ * @method array getRoutes()
+ * @method array getAuthenticatedRoutes()
+ * @method string getPath()
  */
 trait HasRoutes
 {

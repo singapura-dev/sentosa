@@ -5,6 +5,9 @@ namespace Sentosa\Components\UI;
 use Sentosa\Components\Concerns\HasId;
 use Sentosa\Components\ViewComponent;
 
+/**
+ * @method static options($options) Set options
+ */
 abstract class Ag extends ViewComponent
 {
     use HasId;
@@ -26,7 +29,7 @@ abstract class Ag extends ViewComponent
             return $this->evaluate($this->locale);
         }
         $locale = static::$LANG_MAPS[app()->getLocale()] ?? null;
-        if(empty($locale)) {
+        if (empty($locale)) {
             return null;
         }
         return "{!!" . $locale . "!!}";
@@ -40,7 +43,7 @@ abstract class Ag extends ViewComponent
         );
     }
 
-    public function getDefaultOptions():array
+    public function getDefaultOptions(): array
     {
         return [
             'localeText' => $this->getLocaleText(),
