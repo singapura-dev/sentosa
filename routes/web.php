@@ -18,14 +18,12 @@ foreach (app(PanelManager::class)->getPanels() as $panel) {
                 foreach ($panel->getRoutes() as $routes) {
                     $routes($panel);
                 }
-
                 if ($panel->hasLogin()) {
                     Route::name('auth.')->group(function () {
                         Route::get('login', [AuthController::class, 'login'])->name('login');
                         Route::post('login', [AuthController::class, 'postLogin'])->name('login.post');
                     });
                 }
-
                 Route::middleware($panel->getAuthMiddleware())
                     ->group(function () use ($panel) {
                         foreach ($panel->getAuthenticatedRoutes() as $routes) {

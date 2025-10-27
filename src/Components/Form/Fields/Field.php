@@ -10,6 +10,8 @@ use Sentosa\Components\ViewComponent;
  * @method static name($name) set input name
  * @method string getName() get input name
  * @method static value($value) set input value
+ * @method static rules($rules) set input rules
+ * @method string|array getRules() get input rules
  */
 abstract class Field extends ViewComponent
 {
@@ -18,6 +20,7 @@ abstract class Field extends ViewComponent
 
     public mixed $value = null;
     public mixed $name = '';
+    public mixed $rules = null;
 
     public function getValue()
     {

@@ -8,6 +8,7 @@ use Sentosa\Components\Concerns\HasId;
 use Sentosa\Components\Concerns\HasToast;
 use Sentosa\Components\Panel\Concerns\HasAuth;
 use Sentosa\Components\Panel\Concerns\HasBrand;
+use Sentosa\Components\Panel\Concerns\HasCspNonce;
 use Sentosa\Components\Panel\Concerns\HasNavigation;
 use Sentosa\Components\Panel\Concerns\HasPage;
 use Sentosa\Components\Panel\Concerns\HasRoutes;
@@ -19,6 +20,7 @@ class Panel extends ViewComponent
     use HasAuth;
     use HasBrand;
     use HasChildren;
+    use HasCspNonce;
     use HasNavigation;
     use HasPage;
     use HasRoutes;
@@ -48,10 +50,11 @@ class Panel extends ViewComponent
         'https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler-themes.min.css',
         'https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler-flags.min.css',
         'https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/dist/tabler-icons.min.css',
-        'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css',
         'https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.min.css',
         'https://cdn.jsdelivr.net/npm/sweetalert2@11.22.4/dist/sweetalert2.min.css',
         'https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js',
+        'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css',
+        'https://cdn.jsdelivr.net/npm/toastify-js',
         '/vendor/sentosa/js/sentosa.js',
         '/vendor/sentosa/css/sentosa.css',
     ];

@@ -2,6 +2,7 @@
 
 namespace Sentosa\Pages;
 
+use App\Models\ActivateCode;
 use Sentosa\Components\UI\Button;
 use Sentosa\Page;
 

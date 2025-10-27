@@ -1,14 +1,21 @@
 <?php
 
+use Sentosa\Components\Panel\Panel;
 use Sentosa\PanelManager;
 
 if (!function_exists('panel')) {
-    function panel($id = null)
+    function panel($id = null): Panel
     {
         return app(PanelManager::class)->getPanel($id);
     }
 }
 
+if (!function_exists('csp_nonce')) {
+    function csp_nonce()
+    {
+        return panel()->getCspNonce();
+    }
+}
 if (!function_exists('render')) {
     function render($element, array $context = [])
     {
