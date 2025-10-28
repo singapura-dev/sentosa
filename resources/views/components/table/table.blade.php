@@ -2,7 +2,7 @@
     $rows = $self->getRows();
 @endphp
 <div {{$self->getAttributes('wrapper')->merge(['class' => 'table-responsive'])}}>
-    <table {{$self->getAttributes()->merge(['class' => 'table'])}}>
+    <table {{$self->getAttributes()->merge(['class' => 'table table-vcenter'])}}>
         <thead>
         @foreach($self->getColumns() as $column)
             <th>

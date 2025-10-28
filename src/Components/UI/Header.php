@@ -6,7 +6,7 @@ use Sentosa\Components\ViewComponent;
 
 class Header extends ViewComponent
 {
-    public static string $view = 'sentosa::components.ui.header';
+    public mixed $view = 'sentosa::components.ui.header';
 
     public mixed $title = '';
     public mixed $subtitle = '';

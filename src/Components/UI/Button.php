@@ -15,6 +15,6 @@ class Button extends ViewComponent
     use HasLabel;
     use HasIcon;
 
-    public static string $view = 'sentosa::components.ui.button';
+    public mixed $view = 'sentosa::components.ui.button';
     public mixed $wrapper = 'button';
 }

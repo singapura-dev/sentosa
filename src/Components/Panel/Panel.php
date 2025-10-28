@@ -42,7 +42,7 @@ class Panel extends ViewComponent
     const string CHILDREN_POSITION_HEADER        = 'header';
     const string CHILDREN_POSITION_FOOTER        = 'footer';
 
-    public static string $view = 'sentosa::components.panel.panel';
+    public mixed $view = 'sentosa::components.panel.panel';
     public static string $blank_view = 'sentosa::components.panel.blank';
 
     public array $assets = [
@@ -126,6 +126,6 @@ class Panel extends ViewComponent
         if ($this->blank) {
             return static::$blank_view;
         }
-        return static::$view;
+        return $this->evaluate($this->view);
     }
 }

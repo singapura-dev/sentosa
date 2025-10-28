@@ -8,7 +8,7 @@ namespace Sentosa\Components\Form\Fields;
  */
 class Text extends Field
 {
-    public static string $view = 'sentosa::components.form.fields.text';
+    public mixed $view = 'sentosa::components.form.fields.text';
     public mixed $placeholder = '';
     public mixed $type = 'text';
 

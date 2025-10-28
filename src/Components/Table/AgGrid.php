@@ -12,7 +12,7 @@ use Sentosa\Components\UI\Ag;
  */
 class AgGrid extends Ag
 {
-    public static string $view = 'sentosa::components.table.ag_grid';
+    public mixed $view = 'sentosa::components.table.ag_grid';
     public static array $LANG_MAPS = [
         'zh_CN' => 'AG_GRID_LOCALE_CN',
         'zh_TW' => 'AG_GRID_LOCALE_TW',

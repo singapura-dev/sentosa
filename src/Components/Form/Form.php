@@ -9,7 +9,7 @@ class Form extends ViewComponent
 {
     use HasChildren;
 
-    public static string $view = 'sentosa::components.form.form';
+    public mixed $view = 'sentosa::components.form.form';
     public mixed $action = '';
     public mixed $method = '';
 

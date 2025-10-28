@@ -9,7 +9,7 @@ class Asset extends ViewComponent
 {
     use HasChildren;
 
-    public static string $view = 'sentosa::components.ui.asset';
+    public mixed $view = 'sentosa::components.ui.asset';
     public string $wrapper = '';
     public bool $closable = true;
 }

@@ -3,6 +3,7 @@
 namespace Sentosa\Components\Table\Columns;
 
 use Illuminate\Database\Eloquent\Model;
+use Sentosa\Components\Table\Table;
 use Sentosa\Components\ViewComponent;
 
 /**
@@ -17,6 +18,7 @@ abstract class Column extends ViewComponent
     public mixed $label = null;
     public mixed $field = null;
     public mixed $sortable = false;
+    public ?Table $table = null;
 
     public function getValue()
     {

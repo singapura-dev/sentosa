@@ -12,7 +12,7 @@ use Sentosa\Components\ViewComponent;
  */
 class Table extends ViewComponent
 {
-    public static string $view = 'sentosa::components.table.table';
+    public mixed $view = 'sentosa::components.table.table';
     public mixed $columns = [];
 
     public mixed $rows = [];
@@ -35,7 +35,9 @@ class Table extends ViewComponent
         // build columns
         $columns = [];
         foreach ($this->getColumns() as $column) {
-            $columns[] = $this->getColumn($column);
+            $instance = $this->getColumn($column);
+            $instance->table($this);
+            $columns[] = $instance;
         }
         $this->columns = $columns;
     }

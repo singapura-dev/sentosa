@@ -15,7 +15,7 @@ class MenuItem extends ViewComponent
     use HasIcon;
     use HasLink;
 
-    public static string $view = 'sentosa::components.ui.menu_item';
+    public mixed $view = 'sentosa::components.ui.menu_item';
 
     public mixed $badge = null;
     public mixed $badge_color = null;

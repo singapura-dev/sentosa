@@ -11,7 +11,7 @@ use Sentosa\Components\UI\Ag;
  */
 class AgChart extends Ag
 {
-    public static string $view = 'sentosa::components.chart.ag_chart';
+    public mixed $view = 'sentosa::components.chart.ag_chart';
 
     public static array $LANG_MAPS = [
         'zh_CN' => 'agChartsLocale.AG_CHARTS_LOCALE_ZH_CN',

@@ -23,7 +23,7 @@ abstract class ViewComponent
     use Makeable;
     use WithAttributes;
 
-    public static string $view = '';
+    public mixed $view = '';
     public mixed $shouldRenderUsing = true;
     public array $renderCallbacks = [];
 
@@ -74,11 +74,6 @@ abstract class ViewComponent
     protected function shouldRender(): bool
     {
         return (bool) $this->evaluate($this->shouldRenderUsing);
-    }
-
-    protected function getView(): string
-    {
-        return static::$view;
     }
 
     protected function configureFromArray($config): void

@@ -40,11 +40,19 @@ trait HasRoutes
 
     public mixed $path = '';
 
-    public mixed $homeUrl = '';
+    public mixed $homeUrl = null;
 
     public mixed $dashboard = Dashboard::class;
 
     public array $domains = [];
+
+    public function getHomeUrl(): string
+    {
+        if (empty($this->homeUrl)) {
+            return '/' . $this->path;
+        }
+        return $this->evaluate($this->homeUrl);
+    }
 
     public function domains($domains): static
     {

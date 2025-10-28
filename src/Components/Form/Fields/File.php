@@ -7,7 +7,7 @@ namespace Sentosa\Components\Form\Fields;
  */
 class File extends Text
 {
-    public static string $view = 'sentosa::components.form.fields.file';
+    public mixed $view = 'sentosa::components.form.fields.file';
     public mixed $type = 'file';
     public mixed $disk = null;
 }

@@ -4,7 +4,7 @@ namespace Sentosa\Components\Table\Columns;
 
 class ImageColumn extends Column
 {
-    public static string $view = 'sentosa::components.table.columns.image';
+    public mixed $view = 'sentosa::components.table.columns.image';
     public mixed $width = null;
     public mixed $height = null;
     public mixed $size = 24;

@@ -12,7 +12,7 @@ class TextColumn extends Column
     use HasIcon;
     use Copyable;
 
-    public static string $view = 'sentosa::components.table.columns.text';
+    public mixed $view = 'sentosa::components.table.columns.text';
     public mixed $wrapper = 'span';
 
     public function renderingTextColumn()

@@ -9,7 +9,7 @@ class Container extends ViewComponent
 {
     use HasChildren;
 
-    public static string $view = 'sentosa::components.ui.container';
+    public mixed $view = 'sentosa::components.ui.container';
     public mixed $wrapper = 'div';
 
     public function flex(): static
